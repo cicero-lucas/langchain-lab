@@ -3,6 +3,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![LangChain](https://img.shields.io/badge/LangChain-Framework-blueviolet)](https://python.langchain.com/)
+<img src="https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white" alt="AWS" />
+<img src="https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+<img src="https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white" alt="Node.js" />
+<img src="https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB" alt="React" />
+<img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+<img src="https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white" alt="MongoDB" />
+<img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
 
 Bem-vindo ao **LangChain Lab**!  
 Este repositório reúne exemplos práticos, experimentos e módulos para desenvolvimento de aplicações com [LangChain](https://python.langchain.com/), incluindo:
@@ -77,4 +84,5 @@ Abra uma issue ou envie um pull request.
 
 ## 📄 Licença
 
-Este projeto está sob a licença
+Este projeto está sob a licença MIT.  
+Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
