@@ -1,88 +1,195 @@
-# 🚀 LangChain Lab
+# 🤖 LangChain Lab — AI Chatbot com RAG, Chains e Amazon Bedrock
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![LangChain](https://img.shields.io/badge/LangChain-Framework-blueviolet)](https://python.langchain.com/)
-<img src="https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white" alt="AWS" />
-<img src="https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
-<img src="https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white" alt="Node.js" />
-<img src="https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB" alt="React" />
-<img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
-<img src="https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white" alt="MongoDB" />
-<img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![LangChain](https://img.shields.io/badge/LangChain-0.3-blueviolet?logo=chainlink&logoColor=white)](https://python.langchain.com/)
+[![AWS](https://img.shields.io/badge/AWS_Bedrock-Compatible-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/bedrock/)
+[![FAISS](https://img.shields.io/badge/FAISS-Vector_Search-blue)](https://faiss.ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Bem-vindo ao **LangChain Lab**!  
-Este repositório reúne exemplos práticos, experimentos e módulos para desenvolvimento de aplicações com [LangChain](https://python.langchain.com/), incluindo:
-
-- 🔗 **Chains**: Composição de fluxos de LLMs
-- 📚 **RAG**: Retrieval-Augmented Generation
-- 🧠 **Memória**: Implementação de memória em chains
-- 💡 **Exemplos e Notebooks**: Casos de uso e tutoriais
+Repositório de estudos e projetos práticos com **LangChain**, explorando os principais conceitos de aplicações LLM modernas: **RAG**, **Chains**, **Memória**, **Embeddings** e integração com **AWS Amazon Bedrock**.
 
 ---
 
-## 📦 Estrutura do Projeto
+## 🏗️ Arquitetura do Projeto Principal — Bubi Chatbot
 
 ```
-langChain/
-├── src/
-│   ├── chains/         # Chains customizadas
-│   ├── rag/            # Módulos de RAG
-│   └── memoria/        # Suporte à memória
-├── exemplos/           # Scripts de exemplo
-├── notebooks/          # Notebooks interativos
-├── requirements.txt    # Dependências do projeto
-├── .env.example        # Exemplo de variáveis de ambiente
-└── README.md           # Este arquivo
+Usuário
+   │
+   ▼
+PromptTemplate  ──►  LLM (Gemini / AWS Bedrock)
+                              │
+                  ┌───────────┘
+                  │
+            SequentialChain
+           ┌──────┴──────┐
+      Chain 1          Chain 2
+  (Definição)      (Características)
+                  
+RAG Pipeline:
+  FAQ.txt + produto.csv
+       │
+  TextLoader + CharacterTextSplitter
+       │
+  FAISS VectorStore (Embeddings)
+       │
+  RetrievalQA Chain  ──►  Resposta final
 ```
 
 ---
 
-## ⚙️ Instalação
+## ✨ Funcionalidades
 
-1. Clone o repositório:
-   ```sh
-   git clone https://github.com/seu-usuario/langchain-lab.git
-   cd langchain-lab
-   ```
-
-2. Crie um ambiente virtual e instale as dependências:
-   ```sh
-   python -m venv venv
-   venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-3. Configure as variáveis de ambiente:
-   - Copie `.env.example` para `.env` e preencha com suas chaves de API.
+| Feature | Descrição |
+|--------|-----------|
+| 🔗 **LLMChain** | Integração direta com LLMs via PromptTemplate |
+| 🔄 **SequentialChain** | Pipelines encadeados com múltiplas chains |
+| 🧠 **Memória (ConversationBufferMemory)** | Histórico de conversa persistente |
+| 📚 **RAG com FAISS** | Busca vetorial em documentos (FAQ + catálogo de produtos) |
+| 🗂️ **Output Parsers** | Saídas estruturadas com Pydantic |
+| ☁️ **AWS Bedrock Ready** | Suporte a troca de provider para Amazon Bedrock (Claude, Titan) |
 
 ---
 
-## 🚦 Como Usar
+## 📁 Estrutura
 
-- Execute exemplos em `exemplos/`:
-  ```sh
-  python exemplos/exemplo_chain.py
-  ```
-- Explore os notebooks em `notebooks/` para tutoriais interativos.
+```
+langchain-lab/
+├── bedrock_example.py         # ⭐ Bubi Chatbot rodando no AWS Bedrock
+├── meu_projeto_langchain/
+│   ├── chains.ipynb           # LLMChain e SequentialChain
+│   ├── memory.ipynb           # ConversationBufferMemory
+│   ├── model.ipynb            # Configuração do LLM
+│   ├── promptTemplates.ipynb  # PromptTemplate e few-shot
+│   ├── outputParser.ipynb     # Saídas estruturadas com Pydantic
+│   └── requirements.txt
+├── projeto/
+│   ├── dados/
+│   │   ├── faq.txt            # Base de conhecimento do chatbot
+│   │   └── produto.csv        # Catálogo de produtos
+│   ├── notebooks/
+│   │   └── bubiChatbot.ipynb  # Projeto principal: chatbot com RAG
+│   └── requirements.txt
+├── docs/
+│   └── documentacao.md        # Conceitos e referências do LangChain
+└── .env.example
+```
 
 ---
 
-## 🛡️ Segurança
+## ☁️ AWS Amazon Bedrock Integration
 
-- **NUNCA** compartilhe suas chaves de API.
-- Arquivos sensíveis já estão no `.gitignore`.
+Este projeto foi estruturado para ser **facilmente migrado para Amazon Bedrock**, substituindo o provider do LLM:
+
+```python
+# Usando Gemini (padrão do projeto)
+from langchain_google_genai import ChatGoogleGenerativeAI
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+
+# Migrando para AWS Bedrock (Claude 3)
+from langchain_aws import ChatBedrock
+llm = ChatBedrock(
+    model_id="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+```
+
+> A arquitetura de Chains, RAG e Memória permanece **100% igual** — apenas o provider muda.
+
+Veja o exemplo completo funcionando em [`bedrock_example.py`](./bedrock_example.py):
+
+```bash
+python bedrock_example.py
+```
+
+```
+=== SequentialChain: Análise de Produto ===
+
+Definição:
+Mouse Gamer 7200DPI é um mouse de alta precisão com sensor ajustável
+de até 7200 DPI e botões programáveis, ideal para jogos competitivos.
+
+Características:
+🎯 Mouse Gamer 7200DPI — Precisão Total no Seu Controle
+Sensor ajustável, botões programáveis e design ergonômico. R$ 79,90
+
+=== RAG: Atendimento Bubi (base FAQ + produtos) ===
+
+Pergunta: Qual é a garantia dos produtos?
+Bubi: Todos os nossos produtos possuem garantia de 1 ano contra defeitos de fabricação.
+
+Pergunta: Me fale sobre o Fone Bluetooth X200.
+Bubi: O Fone Bluetooth X200 é um fone sem fio com cancelamento de ruído, por R$ 199,90.
+```
+
+**Serviços AWS relevantes neste contexto:**
+- **Amazon Bedrock** — LLMs gerenciados (Claude, Titan, Llama)
+- **Amazon S3** — armazenamento da base de conhecimento (documentos para RAG)
+- **AWS Lambda** — deploy serverless da chain
+- **Amazon OpenSearch Serverless** — alternativa ao FAISS em produção
 
 ---
 
-## 🤝 Contribuição
+## 🚀 Como Executar
 
-Contribuições são bem-vindas!  
-Abra uma issue ou envie um pull request.
+**1. Clone o repositório:**
+```bash
+git clone https://github.com/<seu-usuario>/langchain-lab.git
+cd langchain-lab
+```
+
+**2. Crie o ambiente virtual e instale as dependências:**
+```bash
+python -m venv venv
+venv\Scripts\activate   # Windows
+pip install -r projeto/requirements.txt
+```
+
+**3. Configure as variáveis de ambiente:**
+```bash
+cp .env.example .env
+# Edite o .env com suas chaves
+```
+
+**4. Execute os notebooks:**
+```bash
+cd projeto/notebooks
+jupyter notebook bubiChatbot.ipynb
+```
+
+---
+
+## 🧪 Projeto Principal: Bubi Chatbot
+
+O **Bubi** é um chatbot de atendimento para uma loja de acessórios tech, construído com:
+
+- **SequentialChain** para gerar descrição + título do produto automaticamente
+- **RAG com FAISS** indexando FAQ e catálogo de produtos em CSV
+- **PromptTemplate** com variáveis parciais para controle de resposta
+- Base de dados local (FAQ + CSV) convertida em **vector store** para busca semântica
+
+---
+
+## 📦 Principais Dependências
+
+```
+langchain==0.3.27
+langchain-google-genai==2.1.8  # provider padrão (Gemini)
+langchain-aws                  # Amazon Bedrock (bedrock_example.py)
+faiss-cpu==1.11.0
+pandas==2.3.1
+python-dotenv==1.1.1
+```
+
+---
+
+## 🔐 Segurança
+
+- Chaves de API armazenadas em `.env` (nunca commitadas)
+- `.gitignore` configurado para ignorar arquivos sensíveis
+- `.env.example` como template sem valores reais
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.  
-Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+MIT License — veja [LICENSE](LICENSE) para detalhes.
